@@ -6,7 +6,6 @@ import { Flowbite, ThemeModeScript } from 'flowbite-react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import NextTopLoader from 'nextjs-toploader';
-import { useToggle } from 'usehooks-ts';
 import './globals.css';
 import Providers from './providers';
 
@@ -24,7 +23,10 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-    title: '핀치독스 - 실시간 해외 경제 뉴스 & 트렌드',
+    title: {
+        default: '핀치독스 - 실시간 해외 경제 뉴스 & 트렌드',
+        template: '%s - 핀치독스',
+    },
     description:
         '해외 경제 뉴스와 커뮤니티 트렌드를 요약/번역해 제공합니다. 새로고침 없이 항상 최신 정보가 업데이트 됩니다.',
 };
