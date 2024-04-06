@@ -19,6 +19,8 @@ export default function Page() {
 
     useEffect(() => {
         setInitialLikedPostsIds(likedPostsIds);
+        // 좋아요 취소 시에도 해당 게시글이 남아있도록 리렌더 방지를 위해
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const isReadMoreActive = (id: number) => activeReadMore.includes(id);

@@ -1,3 +1,9 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: '사이트 정보',
+};
+
 export default function Layout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
