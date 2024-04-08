@@ -45,15 +45,15 @@ const config: Config = {
                 blinkBorderKF: {
                     '0%': {
                         maxHeight: '0',
-                        boxShadow: '0 0 0 0 #3F83F8', // 초기 상태는 테두리가 보이지 않음
+                        boxShadow: '0 0 0 0 #3F83F8',
                         opacity: '0',
                     },
                     '50%': {
                         maxHeight: '100rem',
-                        boxShadow: '0 0 0 3px #3F83F8', // 중간에는 노란색 테두리가 굵어짐
+                        boxShadow: '0 0 0 3px #3F83F8',
                     },
                     '100%': {
-                        boxShadow: '0 0 0 3px transparent', // 최종적으로 테두리가 사라짐
+                        boxShadow: '0 0 0 3px transparent',
                         opacity: '1',
                     },
                 },

@@ -9,7 +9,7 @@ import NewPostCardWrapper from '@/features/NewPostCardWrapper';
 import useLike from '@/hooks/useLike';
 import usePosts from '@/hooks/usePosts';
 import useRealtimePosts from '@/hooks/useRealtimePosts';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
 
 export default function Page() {
@@ -62,6 +62,7 @@ export default function Page() {
                     {...post}
                 />
             ))}
+
             <div ref={ref}>
                 {isValidating && (
                     <SpinnerText text="다음 데이터를 가져오는 중..." />
