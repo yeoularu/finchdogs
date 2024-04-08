@@ -15,18 +15,18 @@ export default function NewPostCardWrapper({
 
     const { ref, inView } = useInView({
         threshold: 0,
+        triggerOnce: true,
     });
 
     useEffect(() => {
         let timer: string | number | NodeJS.Timeout | undefined;
-        // 화면에 보이면서 아직 watched 상태가 아니라면
+
         if (inView && !isInitiallyWatched) {
-            // 애니메이션 지속 시간 후에 상태를 업데이트합니다.
             timer = setTimeout(() => {
                 setWatchedPosts((prev) => [...prev, id]);
-            }, 1200); // 500ms는 애니메이션 지속 시간으로 가정
+            }, 1200);
         }
-        return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 클리어
+        return () => clearTimeout(timer);
     }, [inView, isInitiallyWatched, setWatchedPosts, id]);
 
     return (

@@ -51,5 +51,9 @@ export default function useRealtimePosts() {
         if (anyUpdated) {
             setPosts(updatedPosts);
         }
+
+        // To Fix
+        // setPosts가 수행되므로 posts를 의존성 배열에서 제외.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [likeCountMap]);
 }
