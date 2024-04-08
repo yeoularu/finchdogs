@@ -15,7 +15,7 @@ const fetcher = async (ids: number[]): Promise<Post[]> => {
 };
 
 export default function usePostsByIds(ids: number[]) {
-    const { data, isLoading, isValidating, error } = useSWR(ids, fetcher);
+    const { data, isLoading, error } = useSWR(ids, fetcher);
 
     const likeCountMap = useAtomValue(likeCountAtom);
 
@@ -35,5 +35,5 @@ export default function usePostsByIds(ids: number[]) {
         }
     });
 
-    return { posts, isLoading, isValidating, error };
+    return { posts, isLoading, error };
 }
