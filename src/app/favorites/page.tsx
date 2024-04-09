@@ -46,7 +46,7 @@ export default function Page() {
         return <SpinnerText text="최신 데이터를 가져오는 중..." />;
     }
 
-    if (!likedPostsIds.length) {
+    if (!sortedPosts.length) {
         return (
             <>
                 <Text>좋아한 글이 없습니다.</Text>
