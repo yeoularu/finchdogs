@@ -4,7 +4,7 @@ import isSidebarOpenAtom from '@/atoms/isSidebarOpen';
 import FavoritesLinkIcon from '@/components/Header/FavoritesLinkIcon';
 import Logo from '@/components/Header/Logo';
 import useScrollDirection from '@/hooks/useScrollDirection';
-import { DarkThemeToggle, Dropdown, Sidebar } from 'flowbite-react';
+import { DarkThemeToggle } from 'flowbite-react';
 import { MotionValue, useScroll } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 import { usePathname } from 'next/navigation';
@@ -14,15 +14,15 @@ function getHeaderClassName(
     isScrollingDown: boolean,
     scrollY: MotionValue<number>,
 ) {
-    const isY = scrollY.get() > 10;
+    const y = scrollY.get();
 
     let className =
         'z-10 sticky top-0 flex w-full justify-between px-4 py-2 duration-300 border-b-2 border-b-gray-200 dark:border-b-gray-700';
-    if (isScrollingDown) {
+    if (isScrollingDown && y > 0) {
         className +=
             ' opacity-20 bg-opacity-0 dark:bg-opacity-0 border-b-transparent dark:border-b-transparent';
     }
-    if (isY) {
+    if (y > 10) {
         className += ' bg-white dark:bg-gray-900';
     } else {
         className += ' border-b-transparent dark:border-b-transparent';
