@@ -1,5 +1,7 @@
 import Header from '@/features/Header';
 import SideNavbar from '@/features/SideNavbar';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import '@vidstack/react/player/styles/default/theme.css';
 import { Flowbite, ThemeModeScript } from 'flowbite-react';
@@ -50,6 +52,8 @@ export default function RootLayout({
 
                         <main>{children}</main>
                     </Flowbite>
+                    <Analytics />
+                    <SpeedInsights />
                 </body>
             </html>
         </Providers>
