@@ -1,6 +1,6 @@
-import watchedNewPosts from '@/atoms/watchedNewPosts';
+import viewedNewPostIdsAtom from '@/atoms/viewedNewPostIds';
 import { useAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 export default function NewPostCardWrapper({
@@ -10,28 +10,28 @@ export default function NewPostCardWrapper({
     id: number;
     children: React.ReactNode;
 }>) {
-    const [watchedPosts, setWatchedPosts] = useAtom(watchedNewPosts);
-    const isInitiallyWatched = watchedPosts.includes(id);
+    const [viewedPosts, setViewedPosts] = useAtom(viewedNewPostIdsAtom);
+
+    const initialIsViewed = useRef(viewedPosts.includes(id));
+    const [triggered, setTriggered] = useState(false);
+    const animationDuration = 1200;
 
     const { ref, inView } = useInView({
         threshold: 0,
         triggerOnce: true,
+        onChange: (inView) => {
+            if (inView) {
+                setViewedPosts((prev) => [...prev, id]);
+                setTimeout(() => setTriggered(true), animationDuration);
+            }
+        },
     });
 
-    useEffect(() => {
-        let timer: string | number | NodeJS.Timeout | undefined;
-
-        if (inView && !isInitiallyWatched) {
-            timer = setTimeout(() => {
-                setWatchedPosts((prev) => [...prev, id]);
-            }, 1200);
-        }
-        return () => clearTimeout(timer);
-    }, [inView, isInitiallyWatched, setWatchedPosts, id]);
+    if (initialIsViewed.current) return <>{children}</>;
 
     return (
         <div
-            className={`rounded-lg ${!isInitiallyWatched && inView ? 'animate-blinkBorder' : ''}`}
+            className={`rounded-lg ${!triggered && inView ? 'animate-blinkBorder' : ''}`}
             ref={ref}
         >
             {children}
