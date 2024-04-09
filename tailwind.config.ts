@@ -44,12 +44,10 @@ const config: Config = {
                 },
                 blinkBorderKF: {
                     '0%': {
-                        maxHeight: '0',
                         boxShadow: '0 0 0 0 #3F83F8',
                         opacity: '0',
                     },
                     '50%': {
-                        maxHeight: '100rem',
                         boxShadow: '0 0 0 3px #3F83F8',
                     },
                     '100%': {

@@ -8,13 +8,12 @@ import Text from '@/components/Typography/Text';
 import NewPostCardWrapper from '@/features/NewPostCardWrapper';
 import useLike from '@/hooks/useLike';
 import usePosts from '@/hooks/usePosts';
-import useRealtimePosts from '@/hooks/useRealtimePosts';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useInView } from 'react-intersection-observer';
 
 export default function Page() {
     const { posts, isLoading, isValidating, error, size, setSize } = usePosts();
-    useRealtimePosts();
+
     const realtimePosts = useAtomValue(realtimePostsAtom);
 
     const { isLiked, incrementLikeCount, decrementLikeCount } = useLike();
@@ -51,6 +50,7 @@ export default function Page() {
                     />
                 </NewPostCardWrapper>
             ))}
+
             {posts.map((post) => (
                 <PostCard
                     key={post.id}
