@@ -1,7 +1,7 @@
 import likeCountAtom from '@/atoms/likeCount';
 import realtimePostsAtom from '@/atoms/realtimePosts';
 import { Post } from '@/types/post';
-import { fromNow } from '@/utils/dayjs';
+import { getFromNow } from '@/utils/dayjs';
 import { supabase } from '@/utils/supabaseClient';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
@@ -23,7 +23,7 @@ export default function useRealtimePosts() {
                 (payload) => {
                     const post = {
                         ...payload.new,
-                        fromNow: fromNow(payload.new.inserted_at),
+                        fromNow: getFromNow(payload.new.inserted_at),
                     } as Post;
 
                     setPosts((prev) => [post, ...prev]);
@@ -56,4 +56,18 @@ export default function useRealtimePosts() {
         // setPosts가 수행되므로 posts를 의존성 배열에서 제외.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [likeCountMap]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setPosts(
+                posts.map((post) => {
+                    const newFromNow = getFromNow(post.inserted_at);
+                    if (post.fromNow !== newFromNow) {
+                        return { ...post, fromNow: newFromNow };
+                    } else return post;
+                }),
+            );
+        }, 60000);
+        return () => clearInterval(interval);
+    });
 }

@@ -1,6 +1,6 @@
 import likeCountAtom from '@/atoms/likeCount';
 import { Post } from '@/types/post';
-import { fromNow } from '@/utils/dayjs';
+import { getFromNow } from '@/utils/dayjs';
 import { supabase } from '@/utils/supabaseClient';
 import { useAtomValue } from 'jotai';
 import useSWR from 'swr';
@@ -22,7 +22,7 @@ export default function usePostsByIds(ids: number[]) {
     const posts = data
         ? data.map((post) => ({
               ...post,
-              fromNow: fromNow(post.inserted_at),
+              fromNow: getFromNow(post.inserted_at),
           }))
         : [];
 
