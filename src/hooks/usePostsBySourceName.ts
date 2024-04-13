@@ -1,6 +1,6 @@
 import likeCountAtom from '@/atoms/likeCount';
 import { Post } from '@/types/post';
-import { fromNow } from '@/utils/dayjs';
+import { getFromNow } from '@/utils/dayjs';
 import { supabase } from '@/utils/supabaseClient';
 import { useAtomValue } from 'jotai';
 import useSWRInfinite from 'swr/infinite';
@@ -52,7 +52,7 @@ export default function usePostsBySourceName(og_source: string) {
         ? data.flatMap((page) =>
               page.map((post) => ({
                   ...post,
-                  fromNow: fromNow(post.inserted_at),
+                  fromNow: getFromNow(post.inserted_at),
               })),
           )
         : [];
